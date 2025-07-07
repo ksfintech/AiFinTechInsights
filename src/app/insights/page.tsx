@@ -4,7 +4,7 @@ import { InsightListSkeleton } from '@/components/insights/insight-skeletons';
 import { InsightList } from '@/components/insights/insight-list';
 
 export const metadata = {
-  title: 'AI Fintech Insights | AIFinTechInsights.com',
+  title: 'AI Fintech Insights | AI FinTech Insights',
   description:
     'Explore articles and summaries about the latest trends and applications of AI in finance.',
 };

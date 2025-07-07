@@ -11,7 +11,7 @@ export function Footer() {
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="flex items-center space-x-2 mb-4">
               <Icons.Compass className="h-6 w-6 text-primary" />
-              <span className="text-lg font-bold tracking-tight">AIFinTechInsights.com</span>
+              <span className="text-lg font-bold tracking-tight">AI FinTech Insights</span>
             </Link>
             <p className="text-muted-foreground text-sm max-w-sm">
               Your guide to the world of AI in Fintech. Discover, filter, and
@@ -59,7 +59,7 @@ export function Footer() {
 
         <div className="mt-8 pt-8 border-t flex flex-col sm:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} AIFinTechInsights.com. All Rights Reserved.
+            &copy; {new Date().getFullYear()} AI FinTech Insights. All Rights Reserved.
           </p>
           <div className="flex items-center space-x-4 mt-4 sm:mt-0">
             <Link href="#" className="text-muted-foreground hover:text-primary">

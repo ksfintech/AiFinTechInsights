@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | AIFinTechInsights.com',
-  description: 'Read the terms of service for AIFinTechInsights.com.',
+  title: 'Terms of Service | AI FinTech Insights',
+  description: 'Read the terms of service for AI FinTech Insights.',
 };
 
 export default function TermsOfServicePage() {
@@ -38,14 +38,14 @@ export default function TermsOfServicePage() {
           
           <h3>5. Content Ownership</h3>
           <p>
-            We do not claim any ownership rights in any User Content and nothing in these Terms will be deemed to restrict any rights that you may have to use and exploit your User Content. Subject to the foregoing, AIFinTechInsights.com and its licensors exclusively own all right, title and interest in and to the Services and Content, including all associated intellectual property rights.
+            We do not claim any ownership rights in any User Content and nothing in these Terms will be deemed to restrict any rights that you may have to use and exploit your User Content. Subject to the foregoing, AI FinTech Insights and its licensors exclusively own all right, title and interest in and to the Services and Content, including all associated intellectual property rights.
           </p>
 
           <h3>6. General Prohibitions</h3>
           <p>You agree not to do any of the following:</p>
           <ul>
             <li>Post, upload, publish, submit or transmit any Content that: (i) infringes, misappropriates or violates a third party’s patent, copyright, trademark, trade secret, moral rights or other intellectual property rights, or rights of publicity or privacy; (ii) violates, or encourages any conduct that would violate, any applicable law or regulation or would give rise to civil liability.</li>
-            <li>Use, display, mirror or frame the Services or any individual element within the Services, AIFinTechInsights.com’s name, any AIFinTechInsights.com trademark, logo or other proprietary information, or the layout and design of any page or form contained on a page, without AIFinTechInsights.com’s express written consent.</li>
+            <li>Use, display, mirror or frame the Services or any individual element within the Services, AI FinTech Insights’s name, any AI FinTech Insights trademark, logo or other proprietary information, or the layout and design of any page or form contained on a page, without AI FinTech Insights’s express written consent.</li>
           </ul>
 
           <h3>7. Contact Information</h3>

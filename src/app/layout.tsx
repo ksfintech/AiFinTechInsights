@@ -8,7 +8,7 @@ import { ThemeProvider } from '@/components/layout/theme-provider';
 import { MobileFooter } from '@/components/layout/mobile-footer';
 
 export const metadata: Metadata = {
-  title: 'AIFinTechInsights.com',
+  title: 'AI FinTech Insights',
   description: 'An AI Fintech Agents Directory & Insights Platform',
 };
 

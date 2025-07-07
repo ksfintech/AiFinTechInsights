@@ -21,7 +21,7 @@ import { ArrowLeft } from 'lucide-react';
 import { AdminAgentList } from './admin-tool-list';
 
 export const metadata: Metadata = {
-  title: 'Manage Agents | AIFinTechInsights.com',
+  title: 'Manage Agents | AI FinTech Insights',
   description: 'Add, edit, or delete agents in the directory.',
 };
 

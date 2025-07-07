@@ -4,7 +4,7 @@ import { AgentRecommender } from './recommender';
 import { Wand2 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'AI Agent Recommender | AIFinTechInsights.com',
+  title: 'AI Agent Recommender | AI FinTech Insights',
   description:
     'Describe your business need and get AI-powered recommendations for the best fintech agents to solve your problem.',
 };

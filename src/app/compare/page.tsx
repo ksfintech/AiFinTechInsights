@@ -4,7 +4,7 @@ import { AgentComparison } from '@/components/compare/agent-comparison';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Compare AI Agents | AIFinTechInsights.com',
+  title: 'Compare AI Agents | AI FinTech Insights',
   description:
     'Compare different AI fintech agents side-by-side based on their category, primary use cases, and features.',
 };

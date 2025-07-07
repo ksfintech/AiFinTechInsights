@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     return { title: 'Agent Not Found' };
   }
   return {
-    title: `${agent.name} | AIFinTechInsights.com`,
+    title: `${agent.name} | AI FinTech Insights`,
     description: agent.description,
   };
 }

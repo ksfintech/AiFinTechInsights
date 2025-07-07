@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | AIFinTechInsights.com',
-  description: 'Read the privacy policy for AIFinTechInsights.com.',
+  title: 'Privacy Policy | AI FinTech Insights',
+  description: 'Read the privacy policy for AI FinTech Insights.',
 };
 
 export default function PrivacyPolicyPage() {
@@ -17,7 +17,7 @@ export default function PrivacyPolicyPage() {
         </CardHeader>
         <CardContent className="prose dark:prose-invert max-w-none">
           <p>
-            Welcome to AIFinTechInsights.com. We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.
+            Welcome to AI FinTech Insights. We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.
           </p>
           
           <h3>Information We Collect</h3>

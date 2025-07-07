@@ -44,7 +44,7 @@ export function Header() {
           <Link href="/" className="flex items-center space-x-2">
             <Icons.Compass className="h-6 w-6 text-primary" />
             <span className="text-xl font-bold tracking-tight sm:inline-block">
-              AIFinTechInsights.com
+              AI FinTech Insights
             </span>
           </Link>
         </div>

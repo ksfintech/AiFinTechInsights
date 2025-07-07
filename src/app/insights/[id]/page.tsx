@@ -7,7 +7,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     return { title: 'Insight Not Found' };
   }
   return {
-    title: `${insight.title} | AIFinTechInsights.com`,
+    title: `${insight.title} | AI FinTech Insights`,
     description: insight.summary,
   };
 }

@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/accordion';
 
 export const metadata: Metadata = {
-  title: 'Site Settings | AIFinTechInsights.com',
+  title: 'Site Settings | AI FinTech Insights',
   description: 'Manage site-wide settings.',
 };
 

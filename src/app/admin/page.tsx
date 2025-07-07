@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { LayoutGrid, Lightbulb, Settings } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Admin Dashboard | AIFinTechInsights.com',
+  title: 'Admin Dashboard | AI FinTech Insights',
   description: 'Manage content and settings for the application.',
 };
 

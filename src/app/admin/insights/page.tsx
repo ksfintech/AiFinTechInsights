@@ -21,7 +21,7 @@ import { DeleteInsightButton } from './delete-insight-button';
 import { Pencil } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Manage Insights | AIFinTechInsights.com',
+  title: 'Manage Insights | AI FinTech Insights',
   description: 'Add, edit, or delete insight articles.',
 };
 

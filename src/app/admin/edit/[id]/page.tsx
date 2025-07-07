@@ -23,7 +23,7 @@ export async function generateMetadata({
     };
   }
   return {
-    title: `Edit ${agent.name} | AIFinTechInsights.com`,
+    title: `Edit ${agent.name} | AI FinTech Insights`,
     description: `Update the details for the agent: ${agent.name}.`,
   };
 }
