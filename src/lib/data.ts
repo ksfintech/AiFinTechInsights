@@ -1,17 +1,7 @@
 
 'use server';
 
-import { db } from './firebase';
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  setDoc,
-  writeBatch,
-  deleteDoc,
-  runTransaction,
-} from 'firebase/firestore';
+import { adminDb } from './firebase-admin';
 import {
   AGENTS as initialAgents,
   INSIGHTS as initialInsights,
@@ -20,16 +10,16 @@ import {
 import type { Agent, Insight } from './definitions';
 
 // --- Featured Agent ---
-const FEATURED_AGENT_DOC_REF = doc(db, 'app_config', 'featured_agent');
+const FEATURED_AGENT_DOC_REF = adminDb.collection('app_config').doc('featured_agent');
 
 export async function setFeaturedAgents(agentIds: string[]): Promise<void> {
-  await setDoc(FEATURED_AGENT_DOC_REF, { agentIds: agentIds });
+  await FEATURED_AGENT_DOC_REF.set({ agentIds: agentIds });
 }
 
 export async function getFeaturedAgentIds(): Promise<string[]> {
-  const docSnap = await getDoc(FEATURED_AGENT_DOC_REF);
-  if (docSnap.exists()) {
-    return docSnap.data().agentIds ?? [];
+  const docSnap = await FEATURED_AGENT_DOC_REF.get();
+  if (docSnap.exists) {
+    return docSnap.data()?.agentIds ?? [];
   }
   return [];
 }
@@ -37,19 +27,18 @@ export async function getFeaturedAgentIds(): Promise<string[]> {
 // --- Agents ---
 
 export async function updateAgent(id: string, agentData: Omit<Agent, 'id'>): Promise<void> {
-  const docRef = doc(db, 'agents', id);
-  await setDoc(docRef, agentData);
+  const docRef = adminDb.collection('agents').doc(id);
+  await docRef.set(agentData);
 }
 
 export async function deleteAgent(id: string): Promise<void> {
-  const agentDocRef = doc(db, 'agents', id);
-  const featuredDocRef = doc(db, 'app_config', 'featured_agent');
+  const agentDocRef = adminDb.collection('agents').doc(id);
+  const featuredDocRef = adminDb.collection('app_config').doc('featured_agent');
 
-  await runTransaction(db, async (transaction) => {
-    // This transaction is atomic.
+  await adminDb.runTransaction(async (transaction) => {
     const featuredSnap = await transaction.get(featuredDocRef);
-    if (featuredSnap.exists()) {
-      const featuredIds = featuredSnap.data().agentIds || [];
+    if (featuredSnap.exists) {
+      const featuredIds = featuredSnap.data()?.agentIds ?? [];
       if (featuredIds.includes(id)) {
         const newFeaturedIds = featuredIds.filter((agentId: string) => agentId !== id);
         transaction.update(featuredDocRef, { agentIds: newFeaturedIds });
@@ -70,23 +59,22 @@ export async function addAgent(agentData: Omit<Agent, 'id'>): Promise<Agent> {
     logoUrl: agentData.logoUrl || undefined,
   };
 
-  const docRef = doc(db, 'agents', id);
-  // We don't store the ID in the document itself, only use it as the document ID.
-  await setDoc(docRef, newAgentData);
+  const docRef = adminDb.collection('agents').doc(id);
+  await docRef.set(newAgentData);
 
   return { id, ...newAgentData };
 }
 
 export async function getAgents(): Promise<Agent[]> {
-  const agentsCollection = collection(db, 'agents');
-  const agentSnapshot = await getDocs(agentsCollection);
+  const agentsCollection = adminDb.collection('agents');
+  const agentSnapshot = await agentsCollection.get();
 
   if (agentSnapshot.empty) {
     console.log('No agents found. Seeding database...');
-    const batch = writeBatch(db);
+    const batch = adminDb.batch();
     initialAgents.forEach(agent => {
       const { id, ...agentData } = agent;
-      const docRef = doc(db, 'agents', id);
+      const docRef = adminDb.collection('agents').doc(id);
       batch.set(docRef, agentData);
     });
     await batch.commit();
@@ -105,10 +93,10 @@ export async function getAgents(): Promise<Agent[]> {
 }
 
 export async function getAgentById(id: string): Promise<Agent | undefined> {
-  const docRef = doc(db, 'agents', id);
-  const docSnap = await getDoc(docRef);
+  const docRef = adminDb.collection('agents').doc(id);
+  const docSnap = await docRef.get();
 
-  if (docSnap.exists()) {
+  if (docSnap.exists) {
     return {
       id: docSnap.id,
       ...(docSnap.data() as Omit<Agent, 'id'>),
@@ -119,14 +107,14 @@ export async function getAgentById(id: string): Promise<Agent | undefined> {
 }
 
 export async function getCategories(): Promise<string[]> {
-  const categoriesCollection = collection(db, 'categories');
-  const categorySnapshot = await getDocs(categoriesCollection);
+  const categoriesCollection = adminDb.collection('categories');
+  const categorySnapshot = await categoriesCollection.get();
 
   if (categorySnapshot.empty) {
     console.log('No categories found. Seeding database...');
-    const batch = writeBatch(db);
+    const batch = adminDb.batch();
     initialCategories.forEach(category => {
-      const docRef = doc(db, 'categories', category.id);
+      const docRef = adminDb.collection('categories').doc(category.id);
       batch.set(docRef, { name: category.name });
     });
     await batch.commit();
@@ -148,32 +136,32 @@ export async function addInsight(insightData: Omit<Insight, 'id'>): Promise<Insi
     .replace(/\s+/g, '-')
     .replace(/[^\w-]+/g, '');
   
-  const docRef = doc(db, 'insights', id);
-  await setDoc(docRef, insightData);
+  const docRef = adminDb.collection('insights').doc(id);
+  await docRef.set(insightData);
 
   return { id, ...insightData };
 }
 
 export async function updateInsight(id: string, insightData: Omit<Insight, 'id'>): Promise<void> {
-  const docRef = doc(db, 'insights', id);
-  await setDoc(docRef, insightData, { merge: true });
+  const docRef = adminDb.collection('insights').doc(id);
+  await docRef.set(insightData, { merge: true });
 }
 
 export async function deleteInsight(id: string): Promise<void> {
-  const docRef = doc(db, 'insights', id);
-  await deleteDoc(docRef);
+  const docRef = adminDb.collection('insights').doc(id);
+  await docRef.delete();
 }
 
 export async function getInsights(): Promise<Insight[]> {
-  const insightsCollection = collection(db, 'insights');
-  const insightSnapshot = await getDocs(insightsCollection);
+  const insightsCollection = adminDb.collection('insights');
+  const insightSnapshot = await insightsCollection.get();
 
   if (insightSnapshot.empty) {
     console.log('No insights found. Seeding database...');
-    const batch = writeBatch(db);
+    const batch = adminDb.batch();
     initialInsights.forEach(insight => {
       const { id, ...insightData } = insight;
-      const docRef = doc(db, 'insights', id);
+      const docRef = adminDb.collection('insights').doc(id);
       batch.set(docRef, insightData);
     });
     await batch.commit();
@@ -194,10 +182,10 @@ export async function getInsights(): Promise<Insight[]> {
 export async function getInsightById(
   id: string
 ): Promise<Insight | undefined> {
-  const docRef = doc(db, 'insights', id);
-  const docSnap = await getDoc(docRef);
+  const docRef = adminDb.collection('insights').doc(id);
+  const docSnap = await docRef.get();
 
-  if (docSnap.exists()) {
+  if (docSnap.exists) {
     return {
       id: docSnap.id,
       ...(docSnap.data() as Omit<Insight, 'id'>),
